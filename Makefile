@@ -1,6 +1,6 @@
-SRCS = $(wildcard *.c)
+DIR = src/
 
-# SRC_PREF = $(addprefix src/, $(SRCS))
+SRCS = $(wildcard $(addprefix $(DIR), *.c))
 
 OBJ = $(SRCS:.c=.o)
 
@@ -16,18 +16,18 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	make -C ./libft
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $(OBJ)
+	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ $(OBJ)
 
-%.o: %.c 
-	$(CC) $(CFLAGS) -Iincludes -Ilibft -c $< -o $@
+$(OBJ_DIR)%.o: %.c
+	@$(CC) $(CFLAGS) -Iincludes -Ilibft -c $< -o $@
 
 clean :
 	@make clean -C ./libft
-	@rm -rf src/*.o
+	@rm -rf $(DIR)*.o
 
 fclean : clean
 	@make fclean -C ./libft
-	@rm $(NAME) $(BONUS)
+	@rm $(NAME)
 
 re : fclean all
 	@make re -C ./libft
