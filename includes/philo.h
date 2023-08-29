@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/28 19:04:53 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:37:43 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 
 # include <pthread.h>
 # include <unistd.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include "libft.h"
 
 //status 1 : eating, 2 : thinking, 3 :sleeping
 typedef struct s_philo
 {
-	struct s_info	*data;
+	struct s_info	*info;
+	pthread_t		th_id;
 	int				philo_number;
 	int				die_time;
-	int				number_eat;
 	int				status;
 	pthread_mutex_t	*lock;
 	pthread_mutex_t	*l_fork;
@@ -33,13 +34,20 @@ typedef struct s_philo
 
 typedef struct s_info
 {
-	t_philo			*philo_ids;
+	t_philo			*philos;
 	int				philo_amount;
-	int				time_die;
-	int				time_eat;
-	int				time_sleep;
+	int				meal_amnt;
+	u_int64_t		time_die;
+	u_int64_t		time_eat;
+	u_int64_t		time_sleep;
+	bool			dead;
+
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	print;
 }		t_info;
+
+long	ft_atoi(char *str);
+int		life(t_philo *philo);
 
 #endif
