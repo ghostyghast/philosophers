@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/29 17:37:43 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:00:46 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <pthread.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <sys/time.h>
 # include <stdio.h>
 # include "libft.h"
 

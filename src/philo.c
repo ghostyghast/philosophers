@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:49:12 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/29 17:49:39 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:57:19 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	*routine(void *arg)
 
 int	death_checker(t_info *info)
 {
-	while (info)
+	while (info->dead == 0)
+	{
+		pthread_mutex_lock(info->lock);
+	}
 }
 
 int	main(int c, char **str)
@@ -67,6 +70,7 @@ int	main(int c, char **str)
 	while (++i < info.philo_amount)
 		pthread_create(&info.philos[i].th_id, NULL, routine, &info.philos[i]);
 	i = -1;
+	death_checker(&info);
 	while (++i < info.philo_amount)
 		pthread_join(&info.philos[i].th_id, NULL);
 	return (0);
