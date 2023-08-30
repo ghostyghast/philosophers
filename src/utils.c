@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:09:38 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/30 21:36:00 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/30 22:30:56 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,20 @@ int	check_death(t_philo *philo)
 {	
 	pthread_mutex_lock(philo->lock);
 	if (philo->info->dead == 1)
-		return (printf("another philo died\n"), 0);
-	if (ft_gettime() >= philo->die_time)
+	{
+		if (philo->hand == 1)
+		{
+			put_fork(philo->l_fork);
+			put_fork(philo->r_fork);
+		}
+		return (printf("philo n%i another philo died\n", philo->philo_number), 0);
+	}
+	if (ft_gettime() >= philo->die_time && philo->hand != 1)
 	{
 		philo->info->dead = 1;
 		print_state(philo, DEAD);
 		pthread_mutex_unlock(philo->lock);
-		return (printf("i died cuz of time\n"), 0);
+		return (printf("philo n%i died cuz of time\n", philo->philo_number), 0);
 	}
 	pthread_mutex_unlock(philo->lock);
 	return (1);

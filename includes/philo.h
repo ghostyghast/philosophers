@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/30 19:30:52 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/30 22:30:34 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_philo
 	pthread_t		th_id;
 	int				philo_number;
 	u_int64_t		die_time;
-	int				status;
+	int				hand;
 	pthread_mutex_t	*lock;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;

@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:49:12 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/30 21:24:10 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:56:16 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	main(int c, char **str)
 	i = -1;
 	while (++i < info.philo_amount)
 		pthread_join(info.philos[i].th_id, NULL);
+	printf("hi im here\n");
 	free_stuff(&info);
 	return (0);
 }
