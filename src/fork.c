@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:31:28 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/30 22:35:02 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/31 01:23:19 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	take_fork(t_philo *philo, pthread_mutex_t *fork)
 {
-	pthread_mutex_lock(fork);
+	if (!check_death(philo))
+		return ;
 	print_state(philo, TAKE_FORK);
+	pthread_mutex_lock(fork);
 }
 
 void	put_fork(pthread_mutex_t *fork)

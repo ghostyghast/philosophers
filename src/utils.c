@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:09:38 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/30 22:30:56 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/31 01:25:04 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_usleep(u_int64_t time)
 void	print_state(t_philo *philo, char *status)
 {
 	pthread_mutex_lock(&philo->info->print);
-	printf("%llu %i %s\n", ft_gettime(), philo->philo_number, status);
+	printf("%lu %i %s\n", ft_gettime(), philo->philo_number, status);
 	pthread_mutex_unlock(&philo->info->print);
 }
 
@@ -41,19 +41,17 @@ int	check_death(t_philo *philo)
 	pthread_mutex_lock(philo->lock);
 	if (philo->info->dead == 1)
 	{
-		if (philo->hand == 1)
-		{
-			put_fork(philo->l_fork);
-			put_fork(philo->r_fork);
-		}
-		return (printf("philo n%i another philo died\n", philo->philo_number), 0);
+		put_forks(philo);
+		pthread_mutex_unlock(philo->lock);
+		return (0);
 	}
 	if (ft_gettime() >= philo->die_time && philo->hand != 1)
 	{
+		put_forks(philo);
 		philo->info->dead = 1;
 		print_state(philo, DEAD);
 		pthread_mutex_unlock(philo->lock);
-		return (printf("philo n%i died cuz of time\n", philo->philo_number), 0);
+		return (0);
 	}
 	pthread_mutex_unlock(philo->lock);
 	return (1);

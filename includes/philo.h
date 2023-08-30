@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/30 22:30:34 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/31 01:17:07 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int			init_vars(char **str, int c, t_info *info);
 //forks
 void		take_fork(t_philo *philo, pthread_mutex_t *fork);
 void		put_fork(pthread_mutex_t *fork);
+void		put_forks(t_philo *philo);
 
 //utils
 int			check_death(t_philo *philo);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   life.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:36:28 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/30 22:35:52 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/31 01:25:33 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int	think(t_philo *philo)
 int	life(t_philo *philo)
 {
 	if (!think(philo))
-		return (printf("think : 0\n"), 0);
+		return (0);
 	if (!eat(philo))
-		return (printf("eat : 0\n"), 0);
+		return (0);
 	if (!sleepy(philo))
-		return (printf("sleepy : 0\n"), 0);
+		return (0);
 	return (1);
 }
