@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:31:28 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/30 22:33:33 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/30 22:35:02 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,8 @@ void	put_forks(t_philo *philo)
 			pthread_mutex_unlock(philo->l_fork);
 	}
 	else if (philo->hand == 2)
-	
+	{
+		pthread_mutex_unlock(philo->l_fork);
+		pthread_mutex_unlock(philo->r_fork);
+	}
 }
