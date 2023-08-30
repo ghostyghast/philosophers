@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:49:12 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/30 18:18:37 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:24:10 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 int	check_args(char **str)
 {
-	str++;
-	while (str++ && *str)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str[++i] && str[i][0])
 	{
-		while (**str)
+		j = -1;
+		while (str[i][++j])
 		{
-			if (**str <= '0' || **str >= '9')
+			if (str[i][j] < '0' || str[i][j] > '9')
 				return (0);
-			(*str)++;
 		}
 	}
 	return (1);

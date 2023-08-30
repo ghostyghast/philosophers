@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/30 18:18:18 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:30:52 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/time.h>
 # include <stdio.h>
 
-# define DEAD "has died"
+# define DEAD "died"
 # define EATING "is eating"
 # define THINKING "is thinking"
 # define SLEEPING "is sleeping"
@@ -31,7 +31,7 @@ typedef struct s_philo
 	struct s_info	*info;
 	pthread_t		th_id;
 	int				philo_number;
-	int				die_time;
+	u_int64_t		die_time;
 	int				status;
 	pthread_mutex_t	*lock;
 	pthread_mutex_t	*l_fork;
@@ -48,8 +48,8 @@ typedef struct s_info
 	u_int64_t		time_sleep;
 	bool			dead;
 
-	pthread_mutex_t	*forks;
 	pthread_mutex_t	lock;
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
 }		t_info;
 
@@ -60,7 +60,7 @@ int			eat(t_philo *philo);
 int			life(t_philo *philo);
 
 //init
-int	init_vars(char **str, int c, t_info *info);
+int			init_vars(char **str, int c, t_info *info);
 
 //forks
 void		take_fork(t_philo *philo, pthread_mutex_t *fork);

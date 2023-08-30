@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:39:35 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/30 18:15:01 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:45:32 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ static int	is_space(char c)
 	return (is_char(c, "\t\n\v\f\r "));
 }
 
-static int	is_operator(char c)
-{
-	return (is_char(c, "+-"));
-}
-
 static int	is_digit(char c)
 {
 	return (c >= '0' && c <= '9');
@@ -47,12 +42,6 @@ long	ft_atoi(char *str)
 	sign = 1;
 	while (is_space(*str))
 		str++;
-	if (is_operator(*str))
-	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
-	}
 	while (is_digit(*str))
 	{
 		result *= 10;
