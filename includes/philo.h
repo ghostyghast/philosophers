@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/29 18:00:46 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:18:18 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,16 @@
 # include <pthread.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <stdlib.h>
 # include <sys/time.h>
 # include <stdio.h>
-# include "libft.h"
 
-//status 1 : eating, 2 : thinking, 3 :sleeping
+# define DEAD "has died"
+# define EATING "is eating"
+# define THINKING "is thinking"
+# define SLEEPING "is sleeping"
+# define TAKE_FORK "has taken a fork"
+
 typedef struct s_philo
 {
 	struct s_info	*info;
@@ -48,7 +53,25 @@ typedef struct s_info
 	pthread_mutex_t	print;
 }		t_info;
 
-long	ft_atoi(char *str);
-int		life(t_philo *philo);
+//life cycle
+int			sleepy(t_philo *philo);
+int			think(t_philo *philo);
+int			eat(t_philo *philo);
+int			life(t_philo *philo);
+
+//init
+int	init_vars(char **str, int c, t_info *info);
+
+//forks
+void		take_fork(t_philo *philo, pthread_mutex_t *fork);
+void		put_fork(pthread_mutex_t *fork);
+
+//utils
+int			check_death(t_philo *philo);
+long		ft_atoi(char *str);
+void		print_state(t_philo *philo, char *status);
+void		ft_usleep(u_int64_t time);
+void		free_stuff(t_info *info);
+u_int64_t	ft_gettime(void);
 
 #endif

@@ -4,7 +4,7 @@ SRCS = $(wildcard $(addprefix $(DIR), *.c))
 
 OBJ = $(SRCS:.c=.o)
 
-NAME = philosophers
+NAME = philo
 
 INCLUDES = -Iincludes
 

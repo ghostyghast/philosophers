@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:49:12 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/29 17:57:19 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:18:37 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,23 @@ void	*routine(void *arg)
 	return (NULL);
 }
 
-int	death_checker(t_info *info)
-{
-	while (info->dead == 0)
-	{
-		pthread_mutex_lock(info->lock);
-	}
-}
-
 int	main(int c, char **str)
 {
 	t_info	info;
 	int		i;
 
 	if (c != 5 && c != 6)
-		return (ft_printf("invalid arg amount\n"), -1);
+		return (printf("invalid arg amount\n"), -1);
 	if (!check_args(str))
-		return (ft_printf("invalid arguments\n"), -1);
+		return (printf("invalid arguments\n"), -1);
 	if (!init_vars(str, c, &info))
-		return (ft_printf("error during variable initiation\n"), -1);
+		return (printf("error during variable initiation\n"), -1);
 	i = -1;
 	while (++i < info.philo_amount)
 		pthread_create(&info.philos[i].th_id, NULL, routine, &info.philos[i]);
 	i = -1;
-	death_checker(&info);
 	while (++i < info.philo_amount)
-		pthread_join(&info.philos[i].th_id, NULL);
+		pthread_join(info.philos[i].th_id, NULL);
+	free_stuff(&info);
 	return (0);
 }

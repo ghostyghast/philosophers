@@ -6,11 +6,11 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:39:35 by amaligno          #+#    #+#             */
-/*   Updated: 2023/06/06 16:47:53 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:15:01 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "philo.h"
 
 static int	is_char(char c, char *s)
 {
