@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:05:20 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/30 22:35:36 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:43:42 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ int	init_vars(char **str, int c, t_info *info)
 	if (!malloc_data(info))
 		return (0);
 	init_philos(info);
-	return (1);
+	return (info->philo_amount);
 }
