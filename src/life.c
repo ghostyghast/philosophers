@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   life.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:36:28 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/31 02:10:10 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:05:36 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	sleepy(t_philo *philo)
 
 int	eat(t_philo *philo)
 {
-	philo->die_time = ft_gettime() + philo->info->time_die;
 	if (!check_death(philo))
 		return (0);
 	if (philo->philo_number % 2 == 0)
@@ -35,6 +34,7 @@ int	eat(t_philo *philo)
 		return (0);
 	print_state(philo, EATING);
 	ft_usleep(philo->info->time_eat);
+	philo->die_time = ft_gettime() + philo->info->time_die;
 	put_forks(philo);
 	philo->hand = 0;
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:09:38 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/31 01:25:04 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:50:12 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_usleep(u_int64_t time)
 void	print_state(t_philo *philo, char *status)
 {
 	pthread_mutex_lock(&philo->info->print);
-	printf("%lu %i %s\n", ft_gettime(), philo->philo_number, status);
+	printf("%llu %i %s\n", ft_gettime(), philo->philo_number, status);
 	pthread_mutex_unlock(&philo->info->print);
 }
 
@@ -45,7 +45,7 @@ int	check_death(t_philo *philo)
 		pthread_mutex_unlock(philo->lock);
 		return (0);
 	}
-	if (ft_gettime() >= philo->die_time && philo->hand != 1)
+	if (ft_gettime() >= philo->die_time)
 	{
 		put_forks(philo);
 		philo->info->dead = 1;
