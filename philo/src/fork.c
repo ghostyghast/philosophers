@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:31:28 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/04 15:47:36 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/05 19:32:36 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	put_forks(t_philo *philo)
 	if (philo->hand == 1)
 	{
 		if (philo->philo_number % 2 == 0)
-			pthread_mutex_unlock(philo->r_fork);
-		else
 			pthread_mutex_unlock(philo->l_fork);
+		else
+			pthread_mutex_unlock(philo->r_fork);
 	}
 	else if (philo->hand == 2)
 	{
