@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:36:28 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/05 18:13:53 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:49:51 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	eat(t_philo *philo)
 
 int	think(t_philo *philo)
 {
+	// printf("hello\n");
 	if (!check_death(philo))
 		return (0);
 	print_state(philo, THINKING);

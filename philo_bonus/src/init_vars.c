@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:05:20 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/05 18:30:23 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:51:49 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	init_vars(char **str, int c, t_info *info)
 		return (0);
 	info->print = sem_open("print", O_CREAT, 0600, 1);
 	info->forks = sem_open("fork", O_CREAT, 0600, info->philo_amount);
-	info->dead = sem_open("dead", O_CREAT, 0600, 1);
+	info->death = sem_open("death", O_CREAT, 0600, 1);
 	init_philos(info);
 	return (info->philo_amount);
 }

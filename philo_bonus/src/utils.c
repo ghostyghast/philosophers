@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:09:38 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/05 18:32:55 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:51:06 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	check_death(t_philo *philo)
 
 void	free_stuff(t_info *info)
 {
-	int	i;
-
-	i = info->philo_amount;
+	sem_close(info->death);
+	sem_close(info->forks);
+	sem_close(info->print);
 	free(info->philos);
 }
