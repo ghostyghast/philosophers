@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/08/31 01:17:07 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:46:33 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_philo
 	pthread_mutex_t	*lock;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
+	u_int64_t		base_time;
 }		t_philo;
 
 typedef struct s_info
@@ -47,7 +48,6 @@ typedef struct s_info
 	u_int64_t		time_eat;
 	u_int64_t		time_sleep;
 	bool			dead;
-
 	pthread_mutex_t	lock;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;

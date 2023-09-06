@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:36:28 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/05 19:35:28 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:48:01 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	eat(t_philo *philo)
 	ft_usleep(philo->info->time_eat);
 	if (!check_death(philo))
 		return (0);
-	philo->die_time = ft_gettime() + philo->info->time_die;
+	philo->die_time = (ft_gettime() - philo->base_time) + philo->info->time_die;
 	put_forks(philo);
 	philo->hand = 0;
 	return (1);

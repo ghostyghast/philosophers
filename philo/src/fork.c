@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:31:28 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/05 19:32:36 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:52:24 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	take_fork(t_philo *philo, pthread_mutex_t *fork)
 {
 	if (!check_death(philo))
 		return ;
-	print_state(philo, TAKE_FORK);
 	pthread_mutex_lock(fork);
+	print_state(philo, TAKE_FORK);
 }
 
 void	put_fork(pthread_mutex_t *fork)
