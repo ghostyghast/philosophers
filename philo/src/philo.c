@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:49:12 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/06 15:47:35 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/06 16:13:46 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	*one_philo(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	philo->die_time = ft_gettime() + philo->info->time_die;
+	philo->base_time = ft_gettime();
+	philo->die_time = (ft_gettime() - philo->base_time) + philo->info->time_die;
 	think(philo);
 	while (1)
 		if (!check_death(philo))
