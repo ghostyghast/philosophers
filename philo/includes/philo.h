@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/06 15:46:33 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/06 16:04:47 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_info
 	pthread_mutex_t	lock;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
+	pthread_mutex_t	death;
 }		t_info;
 
 //life cycle
