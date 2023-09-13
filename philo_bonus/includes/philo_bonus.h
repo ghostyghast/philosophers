@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:02:09 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/05 18:34:59 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 01:42:41 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <semaphore.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <fcntl.h>
 # include <stdio.h>
 
 # define DEAD "died"
@@ -39,6 +42,7 @@ typedef struct s_info
 	t_philo			*philos;
 	int				philo_amount;
 	int				meal_amnt;
+	u_int64_t		base_time;
 	u_int64_t		time_die;
 	u_int64_t		time_eat;
 	u_int64_t		time_sleep;
@@ -50,10 +54,7 @@ typedef struct s_info
 }		t_info;
 
 //life cycle
-int			sleepy(t_philo *philo);
-int			think(t_philo *philo);
-int			eat(t_philo *philo);
-int			life(t_philo *philo);
+void		life(t_philo *philo);
 
 //init
 int			init_vars(char **str, int c, t_info *info);

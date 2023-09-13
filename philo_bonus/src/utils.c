@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:09:38 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/05 18:51:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 01:43:36 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_usleep(u_int64_t time)
 void	print_state(t_philo *philo, char *status)
 {
 	sem_wait(philo->info->print);
-	printf("%llu %i %s\n", ft_gettime(), philo->philo_number, status);
+	printf("%lu %i %s\n", ft_gettime() - philo->info->base_time, philo->philo_number, status);
 	sem_post(philo->info->print);
 }
 
@@ -42,6 +42,7 @@ int	check_death(t_philo *philo)
 	if (philo->info->dead == 1)
 	{
 		put_forks(philo);
+		sem_post(philo->info->death);
 		return (0);
 	}
 	if (ft_gettime() >= philo->die_time)
