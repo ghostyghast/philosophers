@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:02:09 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/05 18:34:59 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/13 21:33:01 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ typedef struct s_info
 }		t_info;
 
 //life cycle
-int			sleepy(t_philo *philo);
-int			think(t_philo *philo);
-int			eat(t_philo *philo);
-int			life(t_philo *philo);
+void		life(t_philo *philo);
 
 //init
 int			init_vars(char **str, int c, t_info *info);

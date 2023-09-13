@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:07:40 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/05 18:42:25 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/13 21:32:03 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ int	check_args(char **str)
 	{
 		j = -1;
 		while (str[i][++j])
-		{
 			if (str[i][j] < '0' || str[i][j] > '9')
 				return (0);
-		}
 	}
 	return (1);
 }
@@ -35,17 +33,30 @@ void	routine(t_philo *philo)
 	int	i;
 
 	i = -1;
+	if (philo->philo_number % 2 == 0)
+		ft_usleep(philo->info->time_eat);
 	philo->die_time = ft_gettime() + philo->info->time_die;
 	if (philo->info->meal_amnt > 0)
-	{
 		while (++i < philo->info->meal_amnt)
-			if (!life(philo))
-				exit(0);
-	}
+			life(philo);
 	else
-		while (1)
-			if (!life(philo))
-				exit(0);
+		while (check_death(philo))
+			life(philo);
+	exit(0);
+}
+
+void	life(t_philo *philo)
+{
+	print_state(philo, THINKING);
+	take_fork(philo);
+	take_fork(philo);
+	print_state(philo, EATING);
+	ft_usleep(philo->info->time_eat);
+	put_forks(philo);
+	if (check_death(philo))
+		philo->die_time = ft_gettime() + philo->info->time_die;
+	print_state(philo, SLEEPING);
+	ft_usleep(philo->info->time_sleep);
 }
 
 int	main(int c, char **str)

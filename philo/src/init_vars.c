@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:05:20 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/06 16:05:14 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/13 20:44:05 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	init_philos(t_info *info)
 		info->philos[i].info = info;
 		info->philos[i].philo_number = i + 1;
 		info->philos[i].die_time = 0;
-		info->philos[i].hand = 0;
 		info->philos[i].lock = &info->lock;
 		info->philos[i].l_fork = &info->forks[i];
 		info->philos[i].r_fork = &info->forks[(i + 1) % (info->philo_amount)];
