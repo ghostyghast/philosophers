@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/06 16:04:47 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/13 20:08:08 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_philo
 	pthread_mutex_t	*lock;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
-	u_int64_t		base_time;
 }		t_philo;
 
 typedef struct s_info
@@ -44,6 +43,7 @@ typedef struct s_info
 	t_philo			*philos;
 	int				philo_amount;
 	int				meal_amnt;
+	u_int64_t		base_time;
 	u_int64_t		time_die;
 	u_int64_t		time_eat;
 	u_int64_t		time_sleep;
@@ -58,7 +58,7 @@ typedef struct s_info
 int			sleepy(t_philo *philo);
 int			think(t_philo *philo);
 int			eat(t_philo *philo);
-int			life(t_philo *philo);
+void		life(t_philo *philo);
 
 //init
 int			init_vars(char **str, int c, t_info *info);
