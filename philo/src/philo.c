@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:49:12 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/13 20:24:11 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 01:05:25 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	life(t_philo *philo)
 	if (check_death(philo))
 		philo->die_time = ft_gettime() + philo->info->time_die;
 	print_state(philo, SLEEPING);
-	u_int64_t time = ft_gettime();
+	// u_int64_t time = ft_gettime();
 	ft_usleep(philo->info->time_sleep);
-	printf ("time sleep %llu\n", ft_gettime() - time);
+	// printf ("time sleep %lu\n", ft_gettime() - time);
 }
 
 

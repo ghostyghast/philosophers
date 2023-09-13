@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:05:20 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/06 16:05:14 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 02:28:10 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	init_vars(char **str, int c, t_info *info)
 		info->meal_amnt = 0;
 	pthread_mutex_init(&info->lock, NULL);
 	pthread_mutex_init(&info->print, NULL);
-	pthread_mutex_init(&info->death, NULL);
 	if (!malloc_data(info))
 		return (0);
 	init_philos(info);

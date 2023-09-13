@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:09:38 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/13 20:24:58 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 02:26:21 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,13 @@ void	ft_usleep(u_int64_t time)
 void	print_state(t_philo *philo, char *status)
 {
 	if (status == NULL)
-	{
-		pthread_mutex_lock(&philo->info->death);
-		printf("%llu %i %s\n", ft_gettime() - philo->info->base_time,
+		printf("%lu %i %s\n", ft_gettime() - philo->info->base_time,
 			philo->philo_number, DEAD);
-		pthread_mutex_unlock(&philo->info->death);
-	}
 	else
 	{
 		pthread_mutex_lock(&philo->info->print);
 		if (check_death(philo))
-			printf("%llu %i %s\n", ft_gettime() - philo->info->base_time,
+			printf("%lu %i %s\n", ft_gettime() - philo->info->base_time,
 				philo->philo_number, status);
 		pthread_mutex_unlock(&philo->info->print);
 	}

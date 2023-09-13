@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/13 20:08:08 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 02:27:56 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_info
 	pthread_mutex_t	lock;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
-	pthread_mutex_t	death;
 }		t_info;
 
 //life cycle
