@@ -6,7 +6,7 @@
 /*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:31:28 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 01:48:33 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 02:41:31 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ void	take_fork(t_philo *philo)
 {
 	if (!check_death(philo))
 		return ;
-	print_state(philo, TAKE_FORK);
 	sem_wait(philo->info->forks);
-	printf("hello\n");
+	print_state(philo, TAKE_FORK);
 	philo->hand++;
 }
 
@@ -31,4 +30,5 @@ void	put_forks(t_philo *philo)
 		sem_post(philo->info->forks);
 		sem_post(philo->info->forks);
 	}
+	philo->hand = 0;
 }

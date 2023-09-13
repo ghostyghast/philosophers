@@ -6,7 +6,7 @@
 /*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:09:38 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 01:43:36 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 02:57:25 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,36 @@ void	ft_usleep(u_int64_t time)
 
 void	print_state(t_philo *philo, char *status)
 {
-	sem_wait(philo->info->print);
-	printf("%lu %i %s\n", ft_gettime() - philo->info->base_time, philo->philo_number, status);
-	sem_post(philo->info->print);
+	if (status == NULL)
+		printf("%lu %i %s\n", ft_gettime() - philo->info->base_time, philo->philo_number, DEAD);
+	else
+	{
+		sem_wait(philo->info->print);
+		if (check_death(philo))
+			printf("%lu %i %s\n", ft_gettime() - philo->info->base_time, philo->philo_number, status);
+		sem_post(philo->info->print);
+	}
 }
 
 int	check_death(t_philo *philo)
 {	
-	sem_wait(philo->info->death);
+	// sem_wait(philo->info->death);
+	printf("from philo n%idead bool : %i\n", philo->philo_number, philo->info->dead);
 	if (philo->info->dead == 1)
 	{
 		put_forks(philo);
-		sem_post(philo->info->death);
+		// sem_post(philo->info->death);
 		return (0);
 	}
 	if (ft_gettime() >= philo->die_time)
 	{
 		put_forks(philo);
 		philo->info->dead = 1;
-		print_state(philo, DEAD);
-		sem_post(philo->info->death);
+		print_state(philo, NULL);
+		// sem_post(philo->info->death);
 		return (0);
 	}
-	sem_post(philo->info->death);
+	// sem_post(philo->info->death);
 	return (1);
 }
 

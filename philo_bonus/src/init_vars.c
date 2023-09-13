@@ -6,7 +6,7 @@
 /*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:05:20 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 01:49:27 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 02:49:05 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ void	init_philos(t_info *info)
 	}
 }
 
+void	init_sem(t_info *info)
+{
+	sem_unlink("print");
+	sem_unlink("death");
+	sem_unlink("forks");
+	info->print = sem_open("print", O_CREAT, 0600, 1);
+	info->death = sem_open("death", O_CREAT, 0600, 1);
+	info->forks = sem_open("forks", O_CREAT, 0600, info->philo_amount);
+}
+
 int	init_vars(char **str, int c, t_info *info)
 {
 	info->philo_amount = (int)ft_atoi(str[1]);
@@ -40,9 +50,7 @@ int	init_vars(char **str, int c, t_info *info)
 	info->philos = malloc(sizeof(t_philo) * info->philo_amount);
 	if (!info->philos)
 		return (0);
-	info->print = sem_open("print", O_CREAT, 0600, 1);
-	info->forks = sem_open("fork", O_CREAT, 0600, info->philo_amount);
-	info->death = sem_open("death", O_CREAT, 0600, 1);
+	init_sem(info);
 	init_philos(info);
 	return (info->philo_amount);
 }

@@ -6,7 +6,7 @@
 /*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:07:40 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 01:55:45 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 02:43:24 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	check_args(char **str)
 
 void	life(t_philo *philo)
 {
+	// printf("hello\n");
 	print_state(philo, THINKING);
 	take_fork(philo);
 	take_fork(philo);
@@ -51,7 +52,7 @@ void	routine(t_philo *philo)
 		ft_usleep(philo->info->time_eat);
 	philo->die_time = ft_gettime() + philo->info->time_die;
 	if (philo->info->meal_amnt > 0)
-		while (++i < philo->info->meal_amnt)
+		while (++i < philo->info->meal_amnt && check_death(philo))
 			life(philo);
 	else
 		while (check_death(philo))

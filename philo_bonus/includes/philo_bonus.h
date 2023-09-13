@@ -6,7 +6,7 @@
 /*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:02:09 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 01:42:41 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 02:45:35 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int			init_vars(char **str, int c, t_info *info);
 
 //forks
 void		take_fork(t_philo *philo);
-void		put_fork(t_philo *philo);
 void		put_forks(t_philo *philo);
 
 //utils
