@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:49:12 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/13 20:24:11 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/13 20:40:33 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ int	check_args(char **str)
 	{
 		j = -1;
 		while (str[i][++j])
-		{
 			if (str[i][j] < '0' || str[i][j] > '9')
 				return (0);
-		}
 	}
 	return (1);
 }
@@ -36,12 +34,11 @@ void	*one_philo(void *arg)
 
 	philo = (t_philo *)arg;
 	philo->info->base_time = ft_gettime();
-	philo->die_time = (ft_gettime() - philo->info->base_time) + philo->info->time_die;
+	philo->die_time = ft_gettime() + philo->info->time_die;
 	take_fork(philo, philo->l_fork);
 	print_state(philo, THINKING);
-	while (1)
-		if (!check_death(philo))
-			return (arg);
+	while (check_death(philo))
+		;
 	return (arg);
 }
 
@@ -52,14 +49,15 @@ void	*routine(void *arg)
 
 	i = -1;
 	philo = (t_philo *)arg;
-	if (philo->philo_number % 2 == 0)
-		ft_usleep(philo->info->time_eat);
 	philo->die_time = ft_gettime() + philo->info->time_die;
-	if (philo->info->meal_amnt > 0)
+	if (philo->philo_number % 2 == 0)
 	{
+		print_state(philo, THINKING);
+		ft_usleep(philo->info->time_eat);
+	}
+	if (philo->info->meal_amnt > 0)
 		while (++i < philo->info->meal_amnt && check_death(philo))
 			life(philo);
-	}
 	else
 		while (check_death(philo))
 			life(philo);
@@ -77,9 +75,9 @@ void	life(t_philo *philo)
 	if (check_death(philo))
 		philo->die_time = ft_gettime() + philo->info->time_die;
 	print_state(philo, SLEEPING);
-	u_int64_t time = ft_gettime();
+	// u_int64_t time = ft_gettime();
 	ft_usleep(philo->info->time_sleep);
-	printf ("time sleep %llu\n", ft_gettime() - time);
+	// printf ("time sleep %llu\n", ft_gettime() - time);
 }
 
 
