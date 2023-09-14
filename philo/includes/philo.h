@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 13:03:23 by pringles         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:35:24 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <sys/types.h>
 # include <stdio.h>
 
 # define DEAD "died"
@@ -67,7 +68,8 @@ void		take_fork(t_philo *philo, pthread_mutex_t *fork);
 void		put_fork(pthread_mutex_t *fork);
 void		put_forks(t_philo *philo);
 
-//utils
+//utils (smart sleep is in forks.c cuz no space lol )
+void		smart_sleep(t_philo *philo, u_int64_t time);
 int			check_death(t_philo *philo);
 long		ft_atoi(char *str);
 void		print_state(t_philo *philo, char *status);

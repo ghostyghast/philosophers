@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:09:38 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 18:27:23 by pringles         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:09:47 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,13 @@ void	ft_usleep(u_int64_t time)
 
 void	smart_sleep(t_philo *philo, u_int64_t time)
 {
-	u_int64_t	diff;
-	
-	diff = (ft_gettime() + time) - philo->die_time;
-	if ((ft_gettime() + time) > philo->die_time)
+	if ((ft_gettime() + time) >= philo->die_time)
 	{
-		ft_usleep(diff);
+		ft_usleep(philo->die_time - ft_gettime());
 		check_death(philo);
 	}
-	ft_usleep(time);
+	else
+		ft_usleep(time);
 }
 
 void	print_state(t_philo *philo, char *status)

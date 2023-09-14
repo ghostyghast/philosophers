@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:49:12 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 01:05:25 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:07:52 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,12 @@ void	life(t_philo *philo)
 	take_fork(philo, philo->r_fork);
 	take_fork(philo, philo->l_fork);
 	print_state(philo, EATING);
-	ft_usleep(philo->info->time_eat);
+	smart_sleep(philo, philo->info->time_eat);
 	put_forks(philo);
 	if (check_death(philo))
 		philo->die_time = ft_gettime() + philo->info->time_die;
 	print_state(philo, SLEEPING);
-	// u_int64_t time = ft_gettime();
-	ft_usleep(philo->info->time_sleep);
-	// printf ("time sleep %lu\n", ft_gettime() - time);
+	smart_sleep(philo, philo->info->time_sleep);
 }
 
 
