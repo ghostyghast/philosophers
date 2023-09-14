@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:02:09 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 02:45:35 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:45:23 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdbool.h>
 # include <semaphore.h>
 # include <stdlib.h>
+# include <signal.h>
 # include <sys/time.h>
 # include <sys/wait.h>
 # include <sys/types.h>
@@ -39,7 +40,8 @@ typedef struct s_philo
 
 typedef struct s_info
 {
-	t_philo			*philos;
+	t_philo			philos;
+	pid_t			*ids;
 	int				philo_amount;
 	int				meal_amnt;
 	u_int64_t		base_time;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 02:27:56 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:03:23 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_philo
 	struct s_info	*info;
 	pthread_t		th_id;
 	int				philo_number;
-	u_int64_t		die_time;
 	int				hand;
+	u_int64_t		die_time;
 	pthread_mutex_t	*lock;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;

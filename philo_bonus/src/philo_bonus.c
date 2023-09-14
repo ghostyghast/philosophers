@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:07:40 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 02:43:24 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:00:26 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	check_args(char **str)
 
 void	life(t_philo *philo)
 {
-	// printf("hello\n");
 	print_state(philo, THINKING);
 	take_fork(philo);
 	take_fork(philo);
@@ -49,7 +48,10 @@ void	routine(t_philo *philo)
 
 	i = -1;
 	if (philo->philo_number % 2 == 0)
+	{
+		print_state(philo	, THINKING);
 		ft_usleep(philo->info->time_eat);
+	}
 	philo->die_time = ft_gettime() + philo->info->time_die;
 	if (philo->info->meal_amnt > 0)
 		while (++i < philo->info->meal_amnt && check_death(philo))
@@ -78,11 +80,18 @@ int	main(int c, char **str)
 	while (++i < info.philo_amount && pid != 0)
 	{
 		pid = fork();
+		info.philos.philo_number++;
 		if (pid == 0)
-			routine(&info.philos[i]);
+			routine(&info.philos);
 	}
-	while (wait(NULL) != -1)
-		;
+	pid = waitpid(-1, NULL, 0);
+	i = -1;
+	kill(0, SIGINT);
 	free_stuff(&info);
 	return (0);
 }
+
+// void	kill_processes(t_info info)
+// {
+	
+// }
