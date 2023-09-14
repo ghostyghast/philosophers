@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:09:38 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 17:52:11 by pringles         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:27:23 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ void	ft_usleep(u_int64_t time)
 	start = ft_gettime();
 	while ((ft_gettime() - start) < time)
 		usleep(time / 10);
+}
+
+void	smart_sleep(t_philo *philo, u_int64_t time)
+{
+	u_int64_t	diff;
+	
+	diff = (ft_gettime() + time) - philo->die_time;
+	if ((ft_gettime() + time) > philo->die_time)
+	{
+		ft_usleep(diff);
+		check_death(philo);
+	}
+	ft_usleep(time);
 }
 
 void	print_state(t_philo *philo, char *status)
@@ -55,11 +68,4 @@ int	check_death(t_philo *philo)
 		exit(0);
 	}
 	return (1);
-}
-
-void	free_stuff(t_info *info)
-{
-	sem_close(info->death);
-	sem_close(info->forks);
-	sem_close(info->print);
 }

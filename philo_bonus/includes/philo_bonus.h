@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:02:09 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 17:45:23 by pringles         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:28:13 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void		take_fork(t_philo *philo);
 void		put_forks(t_philo *philo);
 
 //utils
+void		smart_sleep(t_philo *philo, u_int64_t time);
 int			check_death(t_philo *philo);
 long		ft_atoi(char *str);
 void		print_state(t_philo *philo, char *status);

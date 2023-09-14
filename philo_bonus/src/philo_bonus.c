@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:07:40 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 18:00:26 by pringles         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:31:07 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	life(t_philo *philo)
 	take_fork(philo);
 	take_fork(philo);
 	print_state(philo, EATING);
-	ft_usleep(philo->info->time_eat);
+	smart_sleep(philo, philo->info->time_eat);
 	put_forks(philo);
 	if (check_death(philo))
 		philo->die_time = ft_gettime() + philo->info->time_die;
 	print_state(philo, SLEEPING);
-	ft_usleep(philo->info->time_sleep);
+	smart_sleep(philo, philo->info->time_sleep);
 }
 
 void	routine(t_philo *philo)
@@ -47,12 +47,18 @@ void	routine(t_philo *philo)
 	int	i;
 
 	i = -1;
+	philo->die_time = ft_gettime() + philo->info->time_die;
 	if (philo->philo_number % 2 == 0)
 	{
-		print_state(philo	, THINKING);
+		print_state(philo, THINKING);
 		ft_usleep(philo->info->time_eat);
 	}
-	philo->die_time = ft_gettime() + philo->info->time_die;
+	if (philo->info->philo_amount == 1)
+	{
+		print_state(philo, THINKING);
+		ft_usleep(philo->info->time_die);
+		check_death(philo);
+	}
 	if (philo->info->meal_amnt > 0)
 		while (++i < philo->info->meal_amnt && check_death(philo))
 			life(philo);
@@ -84,10 +90,11 @@ int	main(int c, char **str)
 		if (pid == 0)
 			routine(&info.philos);
 	}
-	pid = waitpid(-1, NULL, 0);
-	i = -1;
+	waitpid(-1, NULL, 0);
+	sem_close(info.death);
+	sem_close(info.forks);
+	sem_close(info.print);
 	kill(0, SIGINT);
-	free_stuff(&info);
 	return (0);
 }
 

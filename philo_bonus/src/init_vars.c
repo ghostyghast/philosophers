@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:05:20 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 17:29:36 by pringles         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:03:13 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	init_vars(char **str, int c, t_info *info)
 		info->meal_amnt = ft_atoi(str[5]);
 	else
 		info->meal_amnt = 0;
-	info->ids = malloc(sizeof(pid_t) * info->philo_amount);
 	info->philos.info = info;
 	info->philos.philo_number = 0;
 	info->philos.die_time = 0;
