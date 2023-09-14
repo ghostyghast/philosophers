@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:09:38 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 02:26:21 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:30:55 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	print_state(t_philo *philo, char *status)
 int	check_death(t_philo *philo)
 {	
 	pthread_mutex_lock(philo->lock);
-	if (philo->info->dead == 1)
+	if (philo->info->dead || philo->info->all_full)
 	{
 		put_forks(philo);
 		pthread_mutex_unlock(philo->lock);
@@ -61,6 +61,8 @@ int	check_death(t_philo *philo)
 		pthread_mutex_unlock(philo->lock);
 		return (0);
 	}
+	if (philo->info->meals_eaten == philo->info->philo_amount)
+		philo->info->all_full = 1;
 	pthread_mutex_unlock(philo->lock);
 	return (1);
 }

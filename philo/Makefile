@@ -10,7 +10,7 @@ INCLUDES = -Iincludes
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -pthread #-fsanitize=thread -g3
+CFLAGS = -Wall -Werror -Wextra -pthread -fsanitize=thread -g3
 
 all : $(NAME)
 

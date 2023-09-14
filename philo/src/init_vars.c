@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <antoinemalignon@yahoo.com>       +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:05:20 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 02:28:10 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:27:29 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_philos(t_info *info)
 		info->philos[i].philo_number = i + 1;
 		info->philos[i].die_time = 0;
 		info->philos[i].hand = 0;
+		info->philos[i].meals_eaten = 0;
 		info->philos[i].lock = &info->lock;
 		info->philos[i].l_fork = &info->forks[i];
 		info->philos[i].r_fork = &info->forks[(i + 1) % (info->philo_amount)];
@@ -52,10 +53,12 @@ int	init_vars(char **str, int c, t_info *info)
 	info->time_eat = (u_int64_t)ft_atoi(str[3]);
 	info->time_sleep = (u_int64_t)ft_atoi(str[4]);
 	info->dead = 0;
+	info->all_full = 0;
+	info->meals_eaten = 0;
 	if (c == 6)
 		info->meal_amnt = ft_atoi(str[5]);
 	else
-		info->meal_amnt = 0;
+		info->meal_amnt = -1;
 	pthread_mutex_init(&info->lock, NULL);
 	pthread_mutex_init(&info->print, NULL);
 	if (!malloc_data(info))

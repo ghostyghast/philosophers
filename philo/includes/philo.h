@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 18:35:24 by pringles         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:27:20 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo
 	pthread_t		th_id;
 	int				philo_number;
 	int				hand;
+	int				meals_eaten;
 	u_int64_t		die_time;
 	pthread_mutex_t	*lock;
 	pthread_mutex_t	*l_fork;
@@ -48,6 +49,8 @@ typedef struct s_info
 	u_int64_t		time_die;
 	u_int64_t		time_eat;
 	u_int64_t		time_sleep;
+	int				meals_eaten;
+	bool			all_full;
 	bool			dead;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	*forks;
