@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:02:09 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/13 21:33:01 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:59:43 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@
 # include <stdbool.h>
 # include <semaphore.h>
 # include <stdlib.h>
+# include <signal.h>
 # include <sys/time.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <fcntl.h>
 # include <stdio.h>
 
 # define DEAD "died"
@@ -36,9 +40,11 @@ typedef struct s_philo
 
 typedef struct s_info
 {
-	t_philo			*philos;
+	t_philo			philos;
+	pid_t			*ids;
 	int				philo_amount;
 	int				meal_amnt;
+	u_int64_t		base_time;
 	u_int64_t		time_die;
 	u_int64_t		time_eat;
 	u_int64_t		time_sleep;
@@ -57,10 +63,10 @@ int			init_vars(char **str, int c, t_info *info);
 
 //forks
 void		take_fork(t_philo *philo);
-void		put_fork(t_philo *philo);
 void		put_forks(t_philo *philo);
 
 //utils
+void		smart_sleep(t_philo *philo, u_int64_t time);
 int			check_death(t_philo *philo);
 long		ft_atoi(char *str);
 void		print_state(t_philo *philo, char *status);

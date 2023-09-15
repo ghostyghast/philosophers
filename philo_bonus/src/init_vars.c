@@ -6,24 +6,20 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:05:20 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/13 21:34:19 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:59:43 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	init_philos(t_info *info)
+void	init_sem(t_info *info)
 {
-	int	i;
-
-	i = -1;
-	while (++i < info->philo_amount)
-	{
-		info->philos[i].info = info;
-		info->philos[i].philo_number = i + 1;
-		info->philos[i].die_time = 0;
-		info->philos[i].hand = 0;
-	}
+	sem_unlink("print");
+	sem_unlink("death");
+	sem_unlink("forks");
+	info->print = sem_open("print", O_CREAT, 0600, 1);
+	info->death = sem_open("death", O_CREAT, 0600, 1);
+	info->forks = sem_open("forks", O_CREAT, 0600, info->philo_amount);
 }
 
 int	init_vars(char **str, int c, t_info *info)
@@ -37,12 +33,10 @@ int	init_vars(char **str, int c, t_info *info)
 		info->meal_amnt = ft_atoi(str[5]);
 	else
 		info->meal_amnt = 0;
-	info->philos = malloc(sizeof(t_philo) * info->philo_amount);
-	if (!info->philos)
-		return (0);
-	info->print = sem_open("print", O_CREAT, 0600, 1);
-	info->forks = sem_open("fork", O_CREAT, 0600, info->philo_amount);
-	info->death = sem_open("death", O_CREAT, 0600, 1);
-	init_philos(info);
+	info->philos.info = info;
+	info->philos.philo_number = 0;
+	info->philos.die_time = 0;
+	info->philos.hand = 0;
+	init_sem(info);
 	return (info->philo_amount);
 }

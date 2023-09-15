@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:49:12 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/13 20:51:22 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:59:43 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,16 @@ void	*one_philo(void *arg)
 void	*routine(void *arg)
 {
 	t_philo	*philo;
-	int		i;
-
-	i = -1;
+	
 	philo = (t_philo *)arg;
 	philo->die_time = ft_gettime() + philo->info->time_die;
 	if (philo->philo_number % 2 == 0)
 	{
 		print_state(philo, THINKING);
 		ft_usleep(philo->info->time_eat);
-	}
-	if (philo->info->meal_amnt > 0)
-		while (++i < philo->info->meal_amnt && check_death(philo))
-			life(philo);
-	else
-		while (check_death(philo))
-			life(philo);
+	philo->die_time = ft_gettime() + philo->info->time_die;
+	while (check_death(philo))
+		life(philo);
 	return (NULL);
 }
 
@@ -70,12 +64,19 @@ void	life(t_philo *philo)
 	take_fork(philo, philo->r_fork);
 	take_fork(philo, philo->l_fork);
 	print_state(philo, EATING);
-	ft_usleep(philo->info->time_eat);
+	smart_sleep(philo, philo->info->time_eat);
 	put_forks(philo);
+	philo->meals_eaten++;
+	if (philo->meals_eaten == philo->info->meal_amnt)
+	{
+		pthread_mutex_lock(philo->lock);
+		philo->info->meals_eaten++;
+		pthread_mutex_unlock(philo->lock);
+	}
 	if (check_death(philo))
 		philo->die_time = ft_gettime() + philo->info->time_die;
 	print_state(philo, SLEEPING);
-	ft_usleep(philo->info->time_sleep);
+	smart_sleep(philo, philo->info->time_sleep);
 }
 
 int	main(int c, char **str)
@@ -91,7 +92,7 @@ int	main(int c, char **str)
 		return (printf("error during variable initiation\n"), -1);
 	i = -1;
 	info.base_time = ft_gettime();
-	if (atoi(str[1]) == 1)
+	if (info.philo_amount == 1)
 		pthread_create(&info.philos[0].th_id, NULL, one_philo, &info.philos[0]);
 	else
 		while (++i < info.philo_amount)

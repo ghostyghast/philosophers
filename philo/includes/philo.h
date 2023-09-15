@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:35:19 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/13 20:49:01 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:59:43 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <sys/types.h>
 # include <stdio.h>
 
 # define DEAD "died"
@@ -31,6 +32,8 @@ typedef struct s_philo
 	struct s_info	*info;
 	pthread_t		th_id;
 	int				philo_number;
+	int				hand;
+	int				meals_eaten;
 	u_int64_t		die_time;
 	pthread_mutex_t	*lock;
 	pthread_mutex_t	*l_fork;
@@ -46,11 +49,12 @@ typedef struct s_info
 	u_int64_t		time_die;
 	u_int64_t		time_eat;
 	u_int64_t		time_sleep;
+	int				meals_eaten;
+	bool			all_full;
 	bool			dead;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
-	pthread_mutex_t	death;
 }		t_info;
 
 //life
@@ -64,7 +68,8 @@ void		take_fork(t_philo *philo, pthread_mutex_t *fork);
 void		put_fork(pthread_mutex_t *fork);
 void		put_forks(t_philo *philo);
 
-//utils
+//utils (smart sleep is in forks.c cuz no space lol )
+void		smart_sleep(t_philo *philo, u_int64_t time);
 int			check_death(t_philo *philo);
 long		ft_atoi(char *str);
 void		print_state(t_philo *philo, char *status);
