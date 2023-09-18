@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:49:12 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/14 19:52:40 by pringles         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:53:35 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	life(t_philo *philo)
 	take_fork(philo, philo->r_fork);
 	take_fork(philo, philo->l_fork);
 	print_state(philo, EATING);
-	smart_sleep(philo, philo->info->time_eat);
+	if (check_death(philo))
+		smart_sleep(philo, philo->info->time_eat);
 	put_forks(philo);
 	philo->meals_eaten++;
 	if (philo->meals_eaten == philo->info->meal_amnt)
@@ -75,7 +76,8 @@ void	life(t_philo *philo)
 	if (check_death(philo))
 		philo->die_time = ft_gettime() + philo->info->time_die;
 	print_state(philo, SLEEPING);
-	smart_sleep(philo, philo->info->time_sleep);
+	if (check_death(philo))
+		smart_sleep(philo, philo->info->time_sleep);
 }
 
 
