@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:09:38 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/15 17:59:43 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:22:33 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,15 @@ void	print_state(t_philo *philo, char *status)
 	if (status == NULL)
 	{
 		sem_wait(philo->info->print);
-		printf("%lu %i %s\n", ft_gettime() - philo->info->base_time, philo->philo_number, DEAD);
+		printf("%llu %i %s\n", ft_gettime() - philo->info->base_time,
+			philo->philo_number, DEAD);
 	}
 	else
 	{
 		sem_wait(philo->info->print);
 		if (check_death(philo))
-			printf("%lu %i %s\n", ft_gettime() - philo->info->base_time, philo->philo_number, status);
+			printf("%llu %i %s\n", ft_gettime() - philo->info->base_time,
+				philo->philo_number, status);
 		sem_post(philo->info->print);
 	}
 }

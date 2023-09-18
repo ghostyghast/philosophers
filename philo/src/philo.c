@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:49:12 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/18 17:09:02 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:10:36 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ void	*one_philo(void *arg)
 void	*routine(void *arg)
 {
 	t_philo	*philo;
-	
+
 	philo = (t_philo *)arg;
 	philo->die_time = ft_gettime() + philo->info->time_die;
 	if (philo->philo_number % 2 == 0)
 	{
 		print_state(philo, THINKING);
 		ft_usleep(philo->info->time_eat);
+	}
 	philo->die_time = ft_gettime() + philo->info->time_die;
 	while (check_death(philo))
 		life(philo);

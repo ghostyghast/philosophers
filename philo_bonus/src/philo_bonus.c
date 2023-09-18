@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:07:40 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/15 17:57:27 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:33:39 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,11 @@ int	check_args(char **str)
 	return (1);
 }
 
-void	life(t_philo *philo)
-{
-	print_state(philo, THINKING);
-	take_fork(philo);
-	take_fork(philo);
-	print_state(philo, EATING);
-	smart_sleep(philo, philo->info->time_eat);
-	put_forks(philo);
-	if (check_death(philo))
-		philo->die_time = ft_gettime() + philo->info->time_die;
-	print_state(philo, SLEEPING);
-	smart_sleep(philo, philo->info->time_sleep);
-}
-
 void	routine(t_philo *philo)
 {
 	int	i;
 
 	i = -1;
-	if (philo->philo_number % 2 == 0)
-		ft_usleep(philo->info->time_eat);
 	philo->die_time = ft_gettime() + philo->info->time_die;
 	if (philo->philo_number % 2 == 0)
 	{
@@ -62,11 +46,8 @@ void	routine(t_philo *philo)
 		check_death(philo);
 	}
 	if (philo->info->meal_amnt > 0)
-	{
-		while (++i < philo->info->meal_amnt)
-			if (!life(philo))
-				exit(0);
-	}
+		while (check_death(philo) && ++i < philo->info->meal_amnt)
+			life(philo);
 	else
 		while (check_death(philo))
 			life(philo);
@@ -79,12 +60,14 @@ void	life(t_philo *philo)
 	take_fork(philo);
 	take_fork(philo);
 	print_state(philo, EATING);
-	ft_usleep(philo->info->time_eat);
+	if (check_death(philo))
+		smart_sleep(philo, philo->info->time_eat);
 	put_forks(philo);
 	if (check_death(philo))
 		philo->die_time = ft_gettime() + philo->info->time_die;
 	print_state(philo, SLEEPING);
-	ft_usleep(philo->info->time_sleep);
+	if (check_death(philo))
+		smart_sleep(philo, philo->info->time_sleep);
 }
 
 int	main(int c, char **str)
@@ -114,10 +97,4 @@ int	main(int c, char **str)
 	sem_close(info.forks);
 	sem_close(info.print);
 	kill(0, SIGINT);
-	return (0);
 }
-
-// void	kill_processes(t_info info)
-// {
-	
-// }

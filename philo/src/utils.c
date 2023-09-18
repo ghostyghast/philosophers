@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:09:38 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/18 16:54:03 by pringles         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:11:09 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	ft_usleep(u_int64_t time)
 void	print_state(t_philo *philo, char *status)
 {
 	if (status == NULL)
-		printf("%lu %i %s\n", ft_gettime() - philo->info->base_time,
+		printf("%llu %i %s\n", ft_gettime() - philo->info->base_time,
 			philo->philo_number, DEAD);
 	else
 	{
 		pthread_mutex_lock(&philo->info->print);
 		if (check_death(philo))
-			printf("%lu %i %s\n", ft_gettime() - philo->info->base_time,
+			printf("%llu %i %s\n", ft_gettime() - philo->info->base_time,
 				philo->philo_number, status);
 		pthread_mutex_unlock(&philo->info->print);
 	}
@@ -47,8 +47,6 @@ void	print_state(t_philo *philo, char *status)
 int	check_death(t_philo *philo)
 {	
 	pthread_mutex_lock(philo->lock);
-	// if (philo->philo_number == 1)
-		// printf("philo n%i, inside check death\n", philo->philo_number);
 	if (philo->info->dead || philo->info->all_full)
 	{
 		put_forks(philo);
