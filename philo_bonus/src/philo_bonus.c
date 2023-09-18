@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:07:40 by amaligno          #+#    #+#             */
-/*   Updated: 2023/09/18 17:33:39 by amaligno         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:30:09 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,36 @@ void	life(t_philo *philo)
 		smart_sleep(philo, philo->info->time_sleep);
 }
 
+void	start_and_end(t_info *info)
+{
+	int	pid;
+	int	i;
+
+	i = -1;
+	pid = 1;
+	info->base_time = ft_gettime();
+	while (++i < info->philo_amount && pid != 0)
+	{
+		pid = fork();
+		info->philos.philo_number++;
+		if (pid == 0)
+			routine(&info->philos);
+	}
+	i = 0;
+	if (info->meal_amnt > 0)
+		while (i++ < info->philo_amount)
+			waitpid(-1, NULL, 0);
+	else
+		waitpid(-1, NULL, 0);
+	sem_close(info->death);
+	sem_close(info->forks);
+	sem_close(info->print);
+	kill(0, SIGINT);
+}
+
 int	main(int c, char **str)
 {
 	t_info	info;
-	int		pid;
-	int		i;
 
 	if (c != 5 && c != 6)
 		return (printf("invalid arg amount\n"), -1);
@@ -82,19 +107,5 @@ int	main(int c, char **str)
 		return (printf("invalid arguments\n"), -1);
 	if (!init_vars(str, c, &info))
 		return (printf("error during variable initiation\n"), -1);
-	i = -1;
-	pid = 1;
-	info.base_time = ft_gettime();
-	while (++i < info.philo_amount && pid != 0)
-	{
-		pid = fork();
-		info.philos.philo_number++;
-		if (pid == 0)
-			routine(&info.philos);
-	}
-	waitpid(-1, NULL, 0);
-	sem_close(info.death);
-	sem_close(info.forks);
-	sem_close(info.print);
-	kill(0, SIGINT);
+	start_and_end(&info);
 }
