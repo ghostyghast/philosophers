@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="https://i.imgur.com/GFMvD0W.gif" height="500" > </img>
+<img src="docs/assets/philosophers.gif" height="500" > </img>
 
 *A dining philosophers problem simulation*  
 
