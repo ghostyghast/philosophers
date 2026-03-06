@@ -45,14 +45,14 @@ void	print_state(t_philo *philo, char *status)
 	if (status == NULL)
 	{
 		sem_wait(philo->info->print);
-		printf("%llu %i %s\n", ft_gettime() - philo->info->base_time,
+		printf("%lu %i %s\n", ft_gettime() - philo->info->base_time,
 			philo->philo_number, DEAD);
 	}
 	else
 	{
 		sem_wait(philo->info->print);
 		if (check_death(philo))
-			printf("%llu %i %s\n", ft_gettime() - philo->info->base_time,
+			printf("%lu %i %s\n", ft_gettime() - philo->info->base_time,
 				philo->philo_number, status);
 		sem_post(philo->info->print);
 	}

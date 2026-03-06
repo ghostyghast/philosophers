@@ -32,13 +32,13 @@ void	ft_usleep(u_int64_t time)
 void	print_state(t_philo *philo, char *status)
 {
 	if (status == NULL)
-		printf("%llu %i %s\n", ft_gettime() - philo->info->base_time,
+		printf("%lu %i %s\n", ft_gettime() - philo->info->base_time,
 			philo->philo_number, DEAD);
 	else
 	{
 		pthread_mutex_lock(&philo->info->print);
 		if (check_death(philo))
-			printf("%llu %i %s\n", ft_gettime() - philo->info->base_time,
+			printf("%lu %i %s\n", ft_gettime() - philo->info->base_time,
 				philo->philo_number, status);
 		pthread_mutex_unlock(&philo->info->print);
 	}
