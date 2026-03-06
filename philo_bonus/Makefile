@@ -24,7 +24,7 @@ clean :
 	@rm -rf $(DIR)*.o
 
 fclean : clean
-	@rm $(NAME)
+	@rm -rf $(NAME)
 
 re : fclean all
 
